@@ -1,0 +1,34 @@
+# config.toml
+
+name = "My Project"
+version = "1.0.0"
+website = "https://example.com/"
+
+[items]
+numbers = [1,2,3]
+letters = ["a", "b", "c"]
+
+[items.details]
+updated = true
+author = "John Doe"
+
+[database]
+file.type = "sqlite"
+file.path = "data.db"
+
+[inline_table]
+inline = { name = "Jane Doe", age = 29 }
+
+# list of tables
+[[table_group]]
+fruit = "apple"
+
+[[table_group]]
+fruit = "orange"
+
+[[table_group]]
+fruit = "banana"
+
+[owner]
+name = "John Smith"
+dob = 1070-05-27T07:32:48-08:00

@@ -1,0 +1,17 @@
+---
+# comment
+info:
+  version: "1.2.3"
+  website: "https://example.com/"
+
+database:
+  type: sqlite
+  path: /var/db/server.db
+
+routes:
+  - path: /api
+    methods:
+      - GET
+      - POST
+  - path: /admin
+    methods: [GET]

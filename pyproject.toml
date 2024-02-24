@@ -48,6 +48,8 @@ package-type = "library"
 
 # https://pdm-project.org/latest/usage/scripts/
 [tool.pdm.scripts]
+rich_main = { call = "learn_rich:main" }
+rich_module = { shell = "python -m learn_rich" }
 toml_main = { call = "learn_toml:main" }
 toml_module = { shell = "python -m learn_toml" }
 yaml_main = { call = "learn_yaml:main" }

@@ -1,3 +1,5 @@
+""" Yaml Workspace/Demo """
+
 from pprint import pprint
 from typing import Any
 
@@ -20,6 +22,8 @@ def load_yaml() -> dict[Any, Any]:
 
 
 def main() -> None:
+    """Runs the yaml demos"""
+
     # Load Toml data
     data: dict = load_yaml()
 

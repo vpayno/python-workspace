@@ -1,3 +1,5 @@
+""" Toml Workspace/Demo """
+
 import tomllib
 from pprint import pprint
 
@@ -16,6 +18,8 @@ def load_toml() -> dict:
 
 
 def main() -> None:
+    """Runs the toml demos"""
+
     # Load Toml data
     data: dict = load_toml()
     pprint(data, sort_dicts=False)

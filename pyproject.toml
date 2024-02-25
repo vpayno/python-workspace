@@ -78,9 +78,9 @@ test = { composite = ["doctest", "pytest"] }
 
 pydoc_text = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc ${d} | tee ./pydoc/${d}.txt; done" }
 pydoc_html = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc -w ${d}; mv ${d}.html ./pydoc; done" }
-pdoc_html = { shell = "PYTHONPATH=src pdoc --html --force ." }
+pdoc_html = { shell = "PYTHONPATH=src pdoc --html --force --output-dir ./pdoc ." }
 mkdocs = { shell = "mkdocs new mkdocs && cd mkdocs && echo theme: readthedocs >> mkdocs.yml && yq --yaml-output . mkdocs.yml | sponge mkdocs.yml && mkdocs build" }
-doc = { composite = ["pydoc_text", "pydoc_html", "pdoc_text", "mkdocs"] }
+doc = { composite = ["pydoc_text", "pydoc_html", "pdoc_html", "mkdocs"] }
 
 end = { shell = 'printf "\nFinished running pdm run full\n\n"' }
 

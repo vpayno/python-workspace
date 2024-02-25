@@ -170,6 +170,7 @@ cython_debug/
 # Ignore docs.
 /html/
 /pydoc/
+/pdoc/
 /mkdocs/
 /learn*.html
 /learn*.md

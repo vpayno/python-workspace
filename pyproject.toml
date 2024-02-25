@@ -80,7 +80,7 @@ pydoc_text = { shell = "python -m pydoc learn_toml | tee learn_toml.txt" }
 pydoc_html = { shell = "python -m pydoc -w learn_toml" }
 pdoc_html = { shell = "pdoc --html --force ." }
 mkdocs = { shell = "mkdocs new mkdocs && cd mkdocs && echo theme: readthedocs >> mkdocs.yml && yq --yaml-output . mkdocs.yml | sponge mkdocs.yml && mkdocs build" }
-doc = { composite = ["pydoc_text", "pydoc_html", "pdoc_html", "mkdocs"] }
+doc = { composite = ["pydoc_text", "pydoc_html", "mkdocs"] }
 
 full = { composite = ["clean", "format", "lint", "test", "doc"] }
 

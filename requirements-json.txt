@@ -1,0 +1,13 @@
+fastjsonschema
+json5
+jsonlint
+jsonpickle
+jsonpointer
+jsonschema
+jsonschema-lint
+jsonschema-specifications
+orjson
+python-json-logger
+python-lsp-jsonrpc
+types-jsonschema
+ujson

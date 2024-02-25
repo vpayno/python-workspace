@@ -55,8 +55,8 @@ toml_module = { shell = "python -m learn_toml" }
 yaml_main = { call = "learn_yaml:main" }
 yaml_module = { shell = "python -m learn_yaml" }
 
-clean_docs = { shell = "rm -rf html mkdocs *.html [a-z]*.md [a-z]*.txt" }
-clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -print -o -type d -name __pycache__ -delete -print" }
+clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
+clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
 clean_build = { shell = "rm -rf dist" }
 clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
 

@@ -1,6 +1,4 @@
-pyyaml_env_tag
-ruamel.yaml
-ruamel.yaml.clib
+pyyaml
 ruyaml
 yamlfix
 yamllint

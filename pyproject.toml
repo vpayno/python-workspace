@@ -82,15 +82,15 @@ clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
 format = { shell = "ruff format" }
 
 ruff = { shell = "ruff check" }
-pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./tests" }
+pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./test" }
 pyright = { shell = "pyright --stats" }
-refurb = { shell = "refurb ./src ./tests" }
+refurb = { shell = "refurb ./src ./test" }
 bandit = { shell = "bandit --verbose --recursive --config ./pyproject.toml ." }
-mypy = { shell = "mypy --install-types --non-interactive ./src ./tests" }
+mypy = { shell = "mypy --install-types --non-interactive ./src ./test" }
 lint = { composite = ["ruff", "pyright", "pylint", "refurb", "mypy"] }
 
 doctest = { shell = "python -m doctest -v ./src/*/[a-z]*.py" }
-pytest = { shell = "pytest --verbose --cov=. --cov-branch --cov-report=term-missing --cov-report=xml:.coverage.xml -p no:randomly ./tests" }
+pytest = { shell = "pytest --verbose --cov=. --cov-branch --cov-report=term-missing --cov-report=xml:.coverage.xml -p no:randomly ./test" }
 coverage_report = { shell = "coverage report --show-missing" }
 coverage_annotate = { shell = "coverage annotate" }
 test = { composite = ["doctest", "pytest"] }
@@ -106,7 +106,7 @@ end = { shell = 'printf "\nFinished running pdm run full\n\n"' }
 full = { composite = ["clean", "format", "lint", "test", "doc", "end"] }
 
 [tool.pyright]
-include = ["src", "tests"]
+include = ["src", "test"]
 
 [tool.ruff]
 line-length = 120

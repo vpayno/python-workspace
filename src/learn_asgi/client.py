@@ -3,11 +3,42 @@
 import asyncio
 import hashlib
 import time
+from typing import Any, Awaitable, Iterable, Self
 
 import httpx
 from rich import traceback
 
 traceback.install(show_locals=True)
+
+
+class AwaitRateLimited:
+    def __init__(self, awaitables: Iterable[Awaitable], rate: float):
+        self.awaitables = iter(awaitables)
+        self.max_sleep_duration = 1 / rate
+        self.last_iter_at: float | None = None
+
+    def __aiter__(self) -> Self:
+        return self
+
+    async def wait_if_needed(self) -> None:
+        if self.last_iter_at is None:
+            return
+
+        now = time.perf_counter()
+        elapsed = now - self.last_iter_at
+
+        await asyncio.sleep(max(0.0, self.max_sleep_duration - elapsed))
+
+    async def __anext__(self) -> Any:
+        await self.wait_if_needed()
+
+        self.last_iter_at = time.perf_counter()
+
+        try:
+            awaitable = next(self.awaitables)
+        except StopIteration:
+            raise StopAsyncIteration
+        return await awaitable
 
 
 async def fake_file_data():
@@ -69,6 +100,17 @@ async def main():
     start = time.perf_counter()
 
     async for result in await_rate_limited(awaitables, rate=5.0):
+        elapsed = time.perf_counter() - start
+        print(f"[{elapsed:.2f}s] Got result: {result}")
+
+    print("\n")
+    print("Example 4 await for loop iterable with rate-limiting")
+    print("\n")
+
+    awaitables = (use_api(x) for x in range(10))
+    start = time.perf_counter()
+
+    async for result in AwaitRateLimited(awaitables, rate=5.0):
         elapsed = time.perf_counter() - start
         print(f"[{elapsed:.2f}s] Got result: {result}")
 

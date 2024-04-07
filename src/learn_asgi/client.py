@@ -63,7 +63,11 @@ async def await_rate_limited(awaitables, rate: float):
         await asyncio.sleep(max(0.0, max_sleep_duration - elapsed))
 
 
-async def main():
+def main() -> None:
+    asyncio.run(client())
+
+
+async def client() -> None:
     """Main Function"""
 
     print("\n")
@@ -116,4 +120,4 @@ async def main():
 
 
 if __name__ == "__main__":  # pragma: no cover
-    asyncio.run(main())
+    main()

@@ -31,6 +31,8 @@ dependencies = [
     "ujson>=5.9.0",
     "starlette>=0.37.2",
     "uvicorn>=0.29.0",
+    "asyncio>=3.4.3",
+    "httpx>=0.27.0",
 ]
 requires-python = ">=3.12"
 dynamic = ["version"]
@@ -76,6 +78,7 @@ toml_module = { shell = "python -m learn_toml" }
 yaml_main = { call = "learn_yaml:main" }
 yaml_module = { shell = "python -m learn_yaml" }
 asgi_server = { call = "learn_asgi:server" }
+asgi_client = { shell = "pdm run python src/learn_asgi/client.py" }
 asgi_module = { shell = "python -m learn_asgi" }
 
 clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
@@ -162,3 +165,4 @@ learn_rich = "learn_rich.main:main"
 learn_toml = "learn_toml.main:main"
 learn_yaml = "learn_yaml.main:main"
 learn_asgi_server = "learn_asgi.server:main"
+learn_asgi_client = "learn_asgi.client:main"

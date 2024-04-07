@@ -3,7 +3,7 @@
 import asyncio
 import hashlib
 import time
-from typing import Any, Awaitable, Iterable, Self
+from typing import Any, AsyncGenerator, Awaitable, Coroutine, Generator, Iterable, Mapping, Self
 
 import httpx
 from rich import traceback
@@ -41,19 +41,22 @@ class AwaitRateLimited:
         return await awaitable
 
 
-async def fake_file_data():
+# can't figure out the correct return type for this function
+async def fake_file_data() -> Mapping[str, Any] | None | AsyncGenerator[Any, Any]:
     yield b"Hello "
     await asyncio.sleep(0.1)
     yield b"world!"
     yield b""  # EOF
 
 
-async def use_api(x: int):
+async def use_api(x: int) -> int:
     await asyncio.sleep(0.1)
     return 2 * x
 
 
-async def await_rate_limited(awaitables, rate: float):
+async def await_rate_limited(
+    awaitables: Generator[Coroutine[Any, Any, int], None, None], rate: float
+) -> AsyncGenerator[Any, Any]:
     max_sleep_duration = 1 / rate
 
     for aw in awaitables:
@@ -83,6 +86,8 @@ async def client() -> None:
 
         print(f"Got resonse: {data.hex()}")
         print(f"   Expected: {hashlib.sha256(b'Hello world!').hexdigest()}")
+
+    awaitables: Generator[Coroutine[Any, Any, int], None, None]
 
     print("\n")
     print("Example 2 await for loop without rate-limiting")

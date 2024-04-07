@@ -75,9 +75,8 @@ toml_main = { call = "learn_toml:main" }
 toml_module = { shell = "python -m learn_toml" }
 yaml_main = { call = "learn_yaml:main" }
 yaml_module = { shell = "python -m learn_yaml" }
-asgi_main = { call = "learn_asgi:main" }
+asgi_server = { call = "learn_asgi:server" }
 asgi_module = { shell = "python -m learn_asgi" }
-asgi_server = { call = "learn_asgi:main" }
 
 clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
 clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
@@ -162,4 +161,4 @@ skips = ["*/*_test.py", "*/test_*.py"]
 learn_rich = "learn_rich.main:main"
 learn_toml = "learn_toml.main:main"
 learn_yaml = "learn_yaml.main:main"
-learn_asgi_server = "learn_asgi.main:main"
+learn_asgi_server = "learn_asgi.server:main"

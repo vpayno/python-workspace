@@ -50,68 +50,6 @@ keywords = ["python-workspace", "cli", "terminal"]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-[tool.pdm.dev-dependencies]
-dev1 = ["pytest", "pytest-randomly", "pytest-datafiles", "pytest-cov"]
-dev2 = ["mypy", "mypy-extensions"]
-dev3 = ["pyright"]
-dev4 = ["refurb"]
-dev5 = ["ruff"]
-dev6 = ["pylint"]
-dev7 = ["bandit"]
-dev8 = ["mkdocs"]
-dev9 = ["pdoc3"]
-
-[tool.pdm.version]
-source = "scm"
-# write_to = "learn_toml/_version.py"
-# write_template = "__version__ = '{}'"
-
-[tool.pdm]
-package-type = "library"
-
-# https://pdm-project.org/latest/usage/scripts/
-[tool.pdm.scripts]
-rich_main = { call = "learn_rich:main" }
-rich_module = { shell = "python -m learn_rich" }
-toml_main = { call = "learn_toml:main" }
-toml_module = { shell = "python -m learn_toml" }
-yaml_main = { call = "learn_yaml:main" }
-yaml_module = { shell = "python -m learn_yaml" }
-asgi_server = { call = "learn_asgi:server" }
-asgi_client = { shell = "pdm run python src/learn_asgi/client.py" }
-asgi_module = { shell = "python -m learn_asgi" }
-
-clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
-clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
-clean_build = { shell = "rm -rf dist" }
-clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
-
-format = { shell = "ruff format" }
-
-ruff = { shell = "ruff check" }
-pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./test" }
-pyright = { shell = "pyright --stats" }
-refurb = { shell = "refurb ./src ./test" }
-bandit = { shell = "bandit --verbose --recursive --config ./pyproject.toml ." }
-mypy = { shell = "mypy --install-types --non-interactive ./src ./test" }
-lint = { composite = ["ruff", "pyright", "pylint", "refurb", "mypy"] }
-
-doctest = { shell = "python -m doctest -v ./src/*/[a-z]*.py" }
-pytest = { shell = "pytest --verbose --cov=. --cov-branch --cov-report=term-missing --cov-report=xml:.coverage.xml -p no:randomly ./test" }
-coverage_report = { shell = "coverage report --show-missing" }
-coverage_annotate = { shell = "coverage annotate" }
-test = { composite = ["doctest", "pytest"] }
-
-pydoc_text = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc ${d} | tee ./pydoc/${d}.txt; done" }
-pydoc_html = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc -w ${d}; mv ${d}.html ./pydoc; done" }
-pdoc_html = { shell = "PYTHONPATH=src pdoc --html --force --output-dir ./pdoc ." }
-mkdocs = { shell = "mkdocs new mkdocs && cd mkdocs && echo theme: readthedocs >> mkdocs.yml && yq --yaml-output . mkdocs.yml | sponge mkdocs.yml && mkdocs build" }
-doc = { composite = ["pydoc_text", "pydoc_html", "pdoc_html", "mkdocs"] }
-
-end = { shell = 'printf "\nFinished running pdm run full\n\n"' }
-
-full = { composite = ["clean", "format", "lint", "test", "doc", "end"] }
-
 [tool.pyright]
 include = ["src", "test"]
 
@@ -159,6 +97,67 @@ exclude_dirs = [".venv"]
 
 [tool.bandit.assert_used]
 skips = ["*/*_test.py", "*/test_*.py"]
+
+
+[tool.pdm]
+distribution = true
+[tool.pdm.dev-dependencies]
+dev1 = ["pytest", "pytest-randomly", "pytest-datafiles", "pytest-cov"]
+dev2 = ["mypy", "mypy-extensions"]
+dev3 = ["pyright"]
+dev4 = ["refurb"]
+dev5 = ["ruff"]
+dev6 = ["pylint"]
+dev7 = ["bandit"]
+dev8 = ["mkdocs"]
+dev9 = ["pdoc3"]
+
+[tool.pdm.version]
+source = "scm"
+# write_to = "learn_toml/_version.py"
+# write_template = "__version__ = '{}'"
+
+[tool.pdm.scripts]
+rich_main = { call = "learn_rich:main" }
+rich_module = { shell = "python -m learn_rich" }
+toml_main = { call = "learn_toml:main" }
+toml_module = { shell = "python -m learn_toml" }
+yaml_main = { call = "learn_yaml:main" }
+yaml_module = { shell = "python -m learn_yaml" }
+asgi_server = { call = "learn_asgi:server" }
+asgi_client = { shell = "pdm run python src/learn_asgi/client.py" }
+asgi_module = { shell = "python -m learn_asgi" }
+
+clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
+clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
+clean_build = { shell = "rm -rf dist" }
+clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
+
+format = { shell = "ruff format" }
+
+ruff = { shell = "ruff check" }
+pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./test" }
+pyright = { shell = "pyright --stats" }
+refurb = { shell = "refurb ./src ./test" }
+bandit = { shell = "bandit --verbose --recursive --config ./pyproject.toml ." }
+mypy = { shell = "mypy --install-types --non-interactive ./src ./test" }
+lint = { composite = ["ruff", "pyright", "pylint", "refurb", "mypy"] }
+
+doctest = { shell = "python -m doctest -v ./src/*/[a-z]*.py" }
+pytest = { shell = "pytest --verbose --cov=. --cov-branch --cov-report=term-missing --cov-report=xml:.coverage.xml -p no:randomly ./test" }
+coverage_report = { shell = "coverage report --show-missing" }
+coverage_annotate = { shell = "coverage annotate" }
+test = { composite = ["doctest", "pytest"] }
+
+pydoc_text = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc ${d} | tee ./pydoc/${d}.txt; done" }
+pydoc_html = { shell = "mkdir pydoc; for d in $(ls src/); do python -m pydoc -w ${d}; mv ${d}.html ./pydoc; done" }
+pdoc_html = { shell = "PYTHONPATH=src pdoc --html --force --output-dir ./pdoc ." }
+mkdocs = { shell = "mkdocs new mkdocs && cd mkdocs && echo theme: readthedocs >> mkdocs.yml && yq --yaml-output . mkdocs.yml | sponge mkdocs.yml && mkdocs build" }
+doc = { composite = ["pydoc_text", "pydoc_html", "pdoc_html", "mkdocs"] }
+
+end = { shell = 'printf "\nFinished running pdm run full\n\n"' }
+
+full = { composite = ["clean", "format", "lint", "test", "doc", "end"] }
 
 [project.scripts]
 learn_rich = "learn_rich.main:main"

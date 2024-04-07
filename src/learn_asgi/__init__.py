@@ -1,9 +1,9 @@
 """
-main module initialization
+server module initialization
 
 set up for module execution
 """
 
-from learn_asgi.main import main
+from learn_asgi.server import main as server
 
-__all__ = ["main"]
+__all__ = ["server"]

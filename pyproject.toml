@@ -127,6 +127,8 @@ yaml_module = { shell = "python -m learn_yaml" }
 asgi_server = { call = "learn_asgi:server" }
 asgi_client = { call = "learn_asgi:client" }
 asgi_module = { shell = "python -m learn_asgi" }
+enum_main = { call = "learn_enum:main" }
+enum_module = { shell = "python -m learn_enum" }
 
 clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
 clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
@@ -165,3 +167,4 @@ learn_toml = "learn_toml.main:main"
 learn_yaml = "learn_yaml.main:main"
 learn_asgi_server = "learn_asgi.server:main"
 learn_asgi_client = "learn_asgi.client:main"
+learn_enum = "learn_enum.main:main"

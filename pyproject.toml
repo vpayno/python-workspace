@@ -98,19 +98,27 @@ exclude_dirs = [".venv"]
 [tool.bandit.assert_used]
 skips = ["*/*_test.py", "*/test_*.py"]
 
-
 [tool.pdm]
 distribution = true
+
 [tool.pdm.dev-dependencies]
-dev1 = ["pytest", "pytest-randomly", "pytest-datafiles", "pytest-cov"]
-dev2 = ["mypy", "mypy-extensions"]
-dev3 = ["pyright"]
-dev4 = ["refurb"]
-dev5 = ["ruff"]
-dev6 = ["pylint"]
-dev7 = ["bandit"]
-dev8 = ["mkdocs"]
-dev9 = ["pdoc3"]
+dev = [
+    "pytest>=8.1.2",
+    "pytest-randomly",
+    "pytest-datafiles",
+    "pytest-cov",
+    "mypy>=1.10.0",
+    "mypy-extensions>=1.0.0",
+    "pyright>=1.1.360",
+    "refurb",
+    "ruff>=0.4.2",
+    "pylint",
+    "bandit",
+    "mkdocs",
+    "pdoc3",
+    "ruff-lsp>=0.0.53",
+    "python-lsp-server>=1.11.0",
+]
 
 [tool.pdm.version]
 source = "scm"

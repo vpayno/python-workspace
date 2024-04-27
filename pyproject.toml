@@ -145,13 +145,13 @@ clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
 
 format = { shell = "ruff format" }
 
-ruff = { shell = "ruff check" }
-pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./test" }
-pyright = { shell = "pyright --stats" }
-refurb = { shell = "refurb ./src ./test" }
-bandit = { shell = "bandit --verbose --recursive --config ./pyproject.toml ." }
-mypy = { shell = "mypy --install-types --non-interactive ./src ./test" }
-lint = { composite = ["ruff", "pyright", "pylint", "refurb", "mypy"] }
+ci-ruff = { shell = "ruff check" }
+ci-pylint = { shell = "pylint --ignore-patterns='_[a-z][a-z0-9_-]+.py' ./src ./test" }
+ci-pyright = { shell = "pyright --stats" }
+ci-refurb = { shell = "refurb ./src ./test" }
+ci-bandit = { shell = "bandit --verbose --recursive --config ./pyproject.toml ." }
+ci-mypy = { shell = "mypy --install-types --non-interactive ./src ./test" }
+lint = { composite = ["ci-ruff", "ci-pyright", "ci-pylint", "ci-refurb", "ci-mypy"] }
 
 doctest = { shell = "python -m doctest -v ./src/*/[a-z]*.py" }
 pytest = { shell = "pytest --verbose --cov=. --cov-branch --cov-report=term-missing --cov-report=xml:.coverage.xml -p no:randomly ./test" }

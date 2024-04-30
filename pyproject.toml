@@ -37,6 +37,7 @@ dependencies = [
     "pymongo>=4.7.0",
     "testcontainers>=4.4.0",
     "icecream>=2.1.3",
+    "flask>=3.0.3",
 ]
 requires-python = ">=3.12"
 dynamic = ["version"]
@@ -143,6 +144,8 @@ enum_main = { call = "learn_enum:main" }
 enum_module = { shell = "python -m learn_enum" }
 asyncio_main = { call = "learn_asyncio:main" }
 asyncio_module = { shell = "python -m learn_asyncio" }
+flask_main = { call = "learn_flask:main" }
+flask_module = { shell = "python -m learn_flask" }
 
 clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
 clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
@@ -183,3 +186,4 @@ learn_asgi_server = "learn_asgi.server:main"
 learn_asgi_client = "learn_asgi.client:main"
 learn_enum = "learn_enum.main:main"
 learn_asyncio = "learn_asyncio.main:main"
+learn_flask = "learn_flask.main:main"

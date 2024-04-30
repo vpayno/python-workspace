@@ -149,8 +149,9 @@ flask_module = { shell = "python -m learn_flask" }
 
 clean_docs = { shell = "rm -rf html mkdocs pydoc pdoc" }
 clean_pycache = { shell = "find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete" }
+clean_mypy = { shell = "rm -rf ./src/*/.mypy_cache ./test/.mypy_cache" }
 clean_build = { shell = "rm -rf dist" }
-clean = { composite = ["clean_docs", "clean_pycache", "clean_build"] }
+clean = { composite = ["clean_docs", "clean_pycache", "clean_mypy", "clean_build"] }
 
 format = { shell = "ruff format" }
 

@@ -4,6 +4,6 @@ main module initialization
 set up for module execution
 """
 
-from learn_asyncio.main import main as cli
+from learn_asyncio.main import main
 
-__all__ = ["cli"]
+__all__ = ["main"]
